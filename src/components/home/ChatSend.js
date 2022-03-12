@@ -8,6 +8,7 @@ import { CgSpinnerTwo } from 'react-icons/cg';
 import { AuthContext } from '../../contexts/AuthContext';
 import { UploadContext } from '../../contexts/UploadContext';
 import firebase from '../../utils/firebase';
+import { isValidURL } from '../../utils/is-valid-url';
 
 function ChatSend() {
     const { name } = useContext(AuthContext);
@@ -24,7 +25,10 @@ function ChatSend() {
         }
 
         const chatRef = firebase.database().ref('Chats');
-        chatRef.push({ name, type: "text", text, time: getTime() })
+
+        const chatObj = isValidURL(text) ? { name, type: "youtube", src: text, time: getTime() } : { name, type: "text", text, time: getTime() };
+
+        chatRef.push(chatObj)
          .then(res => {})
          .catch(err => console.log(err))
 

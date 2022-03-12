@@ -2,6 +2,7 @@ import ImageChat from "./ImageChat";
 import TextChat from "./TextChat";
 import VideoChat from "./VideoChat";
 import GifChat from "./GifChat";
+import YoutubeChat from "./YoutubeChat";
 
 function Chat({ chat }) {
     switch (chat.type) {
@@ -17,6 +18,8 @@ function Chat({ chat }) {
         case 'gif':
               return <GifChat chat={chat} />
             break;
+        case 'youtube':
+              return <YoutubeChat chat={chat} />
         default:
               return null
             break;
