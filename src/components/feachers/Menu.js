@@ -88,6 +88,15 @@ function Menu() {
             <motion.button
                whileTap={{ scale: 1.5 }}
                className="flex items-center mr-2 rounded py-3 pl-5 w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-white focus:outline-none shadow border-2 border-white"
+               onClick={() => history.push('/gallery')}
+               styles={{ cursor: "none" }}
+            >
+               <MdMovie size="1.5em" className="mr-2" />
+               Gallery
+            </motion.button>
+            <motion.button
+               whileTap={{ scale: 1.5 }}
+               className="flex items-center rounded ml-2 py-3 pl-5 w-full bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 text-white focus:outline-none shadow border-2 border-white"
                onClick={() => history.push('/movies')}
                styles={{ cursor: "none" }}
             >

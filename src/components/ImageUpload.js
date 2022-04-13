@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { IKContext, IKUpload } from 'imagekitio-react';
 import { useHistory } from 'react-router-dom';
-import fileExtension from 'file-extension'; 
+import fileExtension from 'file-extension';
 import { AuthContext } from '../contexts/AuthContext';
 import { UploadContext } from '../contexts/UploadContext';
 import firebase from '../utils/firebase'
