@@ -7,7 +7,8 @@ function ThemeContextProvider({ children }) {
 
     useEffect(() => {
         const toDay = new Date();
-        const isNightTime = toDay.getHours() > 19 ? true : false;
+        const hour = toDay.getHours();
+        const isNightTime = hour < 6 || hour > 19 ? true : false;
         setIsDarkTheme(isNightTime);
     },[])
 
