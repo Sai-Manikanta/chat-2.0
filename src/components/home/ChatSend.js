@@ -13,14 +13,14 @@ import { isValidURL } from '../../utils/is-valid-url';
 function ChatSend() {
     const { name } = useContext(AuthContext);
     const { uploadStatus } = useContext(UploadContext);
-    
+
     const chatInputRef = useRef();
 
     const handleSumbit = e => {
         e.preventDefault();
         const text = chatInputRef.current.value;
 
-        if(!text){
+        if (!text) {
             return null
         }
 
@@ -29,8 +29,8 @@ function ChatSend() {
         const chatObj = isValidURL(text) ? { name, type: "youtube", src: text, time: getTime() } : { name, type: "text", text, time: getTime() };
 
         chatRef.push(chatObj)
-         .then(res => {})
-         .catch(err => console.log(err))
+            .then(res => { })
+            .catch(err => console.log(err))
 
         const typerDocId = name === 'Mani' ? '-Mbo8Klzoo2a5cPA8Ht2' : '-Mbo8RyucsohBdWd440U';
         const typingDocRef = firebase.database().ref('Typing').child(typerDocId);
@@ -38,8 +38,8 @@ function ChatSend() {
             typing: false,
             length: 0
         })
-        .then(() => {})
-        .catch(err => console.log(err))
+            .then(() => { })
+            .catch(err => console.log(err))
 
         chatInputRef.current.value = '';
     }
@@ -47,14 +47,14 @@ function ChatSend() {
     const handleTypingChat = e => {
         const typerDocId = name === 'Mani' ? '-Mbo8Klzoo2a5cPA8Ht2' : '-Mbo8RyucsohBdWd440U';
         const length = e.target.value.length;
-        if(length === 1){  
+        if (length === 1) {
             const typingDocRef = firebase.database().ref('Typing').child(typerDocId);
             typingDocRef.update({
                 typing: true,
                 length
             })
-            .then(() => {})
-            .catch(err => console.log(err))
+                .then(() => { })
+                .catch(err => console.log(err))
         }
     }
 
@@ -65,34 +65,35 @@ function ChatSend() {
             typing: false,
             length: 0
         })
-        .then(() => {})
-        .catch(err => console.log(err))
+            .then(() => { })
+            .catch(err => console.log(err))
+        chatInputRef.current.focus();
     }
 
     return (
         <div className="py-4 px-3 bg-gray-50 dark:bg-gray-800">
             <div className="flex items-center py-1 px-1.5 flex-shrink-0 bg-white rounded-full shadow">
 
-                { uploadStatus ? (
-                        <div className="ml-1 mr-4">
-                            <CgSpinnerTwo size="1.5em" className="text-blue-600 animate-spin" /> 
-                        </div>
+                {uploadStatus ? (
+                    <div className="ml-1 mr-4">
+                        <CgSpinnerTwo size="1.5em" className="text-blue-600 animate-spin" />
+                    </div>
                 ) : (
-                        <Link to="/feachers/image-upload" className="ml-1 mr-4">
-                            <MdFileUpload size="1.3em" className={name === 'Mani' ? 'text-blue-600' : 'text-pink-500'} />
-                        </Link> 
-                ) }
+                    <Link to="/feachers/image-upload" className="ml-1 mr-4">
+                        <MdFileUpload size="1.3em" className={name === 'Mani' ? 'text-blue-600' : 'text-pink-500'} />
+                    </Link>
+                )}
 
-                <form onSubmit={handleSumbit} className="flex flex-grow"> 
-                    <input 
-                        type="text" 
-                        placeholder="Type your message..." 
+                <form onSubmit={handleSumbit} className="flex flex-grow">
+                    <input
+                        type="text"
+                        placeholder="Type your message..."
                         className={`flex-grow outline-none ${name === 'Mani' ? 'text-blue-600' : 'text-pink-500'}`}
                         ref={chatInputRef}
                         onChange={handleTypingChat}
                         onBlur={handleChatBlur}
                     />
-                    <motion.button 
+                    <motion.button
                         className={`p-1.5 ${name === 'Mani' ? 'text-blue-100' : 'text-pink-100'} rounded-full focus:outline-none`}
                         whileFocus={{ scale: 0.9 }}
                     >
